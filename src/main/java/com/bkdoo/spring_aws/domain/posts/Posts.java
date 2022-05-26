@@ -1,6 +1,7 @@
 package com.bkdoo.spring_aws.domain.posts;
 
 
+import com.bkdoo.spring_aws.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity //테이블과 링크될 클래스임을 나타냄
-public class Posts {
+public class Posts extends BaseTimeEntity {
 
     @Id //해당 테이블의 PK필드를 나타냄
     @GeneratedValue(strategy = GenerationType.IDENTITY)//PK의 생성 규칙을 나타냄, Indentity > auto_increment
@@ -42,4 +43,10 @@ public class Posts {
     // 생성자 대신 @Builder를 통해 빌더 클래스 사용
     // 생성자나 빌더나 생성시점에 값을 채워주는 역할은 같음
     // 생성자의 경우 지금 채워야할 필드가 무엇인지 명확히 지정할 수 없음
+
+    // Update 쿼리를 날리지 않고도 update가 가능한 것은 JPA의 영속성 컨텍스트 때문
+    // 영속성 컨텍스트 : 엔티티를 영구 저장하는 환경
+    // 엔티티 매니저가 활성화 된 상태로 트랜잭션 안에서 데이터를 가져오면 영속성 컨텍스트가 유지됨
+    // 트랜잭션이 끝나는 시점에 해당 테이블에 변경분을 반영함.
+    // 이 개념을 더티 체킹(dirty checking)이라고 한다.
 }

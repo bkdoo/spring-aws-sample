@@ -59,6 +59,8 @@ public class PostsApiControllerTest {
         assertThat(all.get(0).getContent()).isEqualTo(content);
 
     }
+    // HelloController와 달리 @WebMvcTest를 사용하지 않음 - WebMvcTest는 JPA기능이 작동하지 않기 때문
+    // JPA 기능까지 한번에 테스트 할 때는 @SpringBootTest와 TestRestTemplate를 사용함
 
 
 }

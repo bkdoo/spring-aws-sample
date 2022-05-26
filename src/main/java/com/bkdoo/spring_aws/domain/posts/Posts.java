@@ -31,6 +31,11 @@ public class Posts {
         this.author = author;
     }
 
+    public void update(String title, String content){
+        this.title = title;
+        this.content = content;
+    }
+
     // Entity 클래서으세너느 절대 Setter 메소드를 만들지 않음
     // 대신 해당 필드 값의 변경이 필요하면 명확한 메소드를 추가해야함
     // 기본적인 구조는 생성자를 통해 최종값을 채운 후에 DB에 insert, 값 변경이 필요한 경우 해당 이벤트에 맞는 public 메소드를 호출

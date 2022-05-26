@@ -4,6 +4,7 @@ package com.bkdoo.spring_aws.web;
 import com.bkdoo.spring_aws.service.posts.PostsService;
 import com.bkdoo.spring_aws.web.dto.PostsSaveRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,4 +19,7 @@ public class PostApiController {
         return postsService.save(requestDto);
     }
 
+    public Long update(@PathVariable Long id, @RequestBody PostsSaveRequestDto requestDto) {
+        return postsService.update(id, requestDto.up);
+    }
 }

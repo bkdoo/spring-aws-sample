@@ -29,6 +29,8 @@ public class PostsService {
 
         posts.update(requestDto.getTitle(), requestDto.getContent());
 
+        postsRepository.save(posts);
+
         return id;
     }
 

@@ -2,10 +2,7 @@ package com.bkdoo.spring_aws.service.posts;
 
 import com.bkdoo.spring_aws.domain.posts.Posts;
 import com.bkdoo.spring_aws.domain.posts.PostsRepository;
-import com.bkdoo.spring_aws.web.dto.PostUpdateRequestDto;
-import com.bkdoo.spring_aws.web.dto.PostsListResponseDto;
-import com.bkdoo.spring_aws.web.dto.PostsResponseDto;
-import com.bkdoo.spring_aws.web.dto.PostsSaveRequestDto;
+import com.bkdoo.spring_aws.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +28,13 @@ public class PostsService {
 
         postsRepository.save(posts);
 
+        return id;
+    }
+
+    @Transactional
+    public Long delete(Long id, PostsDeleteRequestDto requestDto) {
+        Posts posts = postsRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("해당 게시글이 없습니다. id = " + id));
+        postsRepository.delete(posts);
         return id;
     }
 

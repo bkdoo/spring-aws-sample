@@ -1,5 +1,6 @@
 package com.bkdoo.spring_aws.web;
 
+import com.bkdoo.spring_aws.config.auth.LoginUser;
 import com.bkdoo.spring_aws.config.auth.dto.SessionUser;
 import com.bkdoo.spring_aws.service.posts.PostsService;
 import lombok.RequiredArgsConstructor;
@@ -15,8 +16,6 @@ import javax.servlet.http.HttpSession;
 public class IndexController {
 
     private final PostsService postsService;
-    private final HttpSession httpSession;
-
 
     @GetMapping("/posts/save")
     public String postsSave(){
@@ -25,9 +24,8 @@ public class IndexController {
     // index.mustache와 마찬가지로 /posts/save를 호출하면 posts-save.mustache를 호출하는 메소드
 
     @GetMapping("/")
-    public String index(Model model){
+    public String index(Model model, @LoginUser SessionUser user){
         model.addAttribute("posts", postsService.findAllDesc());
-        SessionUser user = (SessionUser) httpSession.getAttribute("user");
         if (user != null){
             model.addAttribute("userName", user.getName());
         }
